@@ -1,5 +1,5 @@
 
-package com.hong.hakwon;
+package com.hong.controller;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -34,6 +34,7 @@ import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,9 +48,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hong.hakwon.common.CmMap;
-import com.hong.hakwon.Beans.UserBean;
-import com.hong.hakwon.UserDAOImpl;
+import com.hong.join.service.JoinService;
+import com.hong.vo.AdressVO;
+import com.hong.vo.CmMap;
+import com.hong.vo.UserVO;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -64,23 +66,44 @@ import com.google.gson.JsonObject;
 @SuppressWarnings("rawtypes")
 public class MainController {
 	
-	private UserDAOImpl uService;
-	
 	private Log	logger	= LogFactory.getLog(this.getClass());
 	
-	
 	@Autowired
-	public void setUserService(UserDAOImpl uService){
-		this.uService=uService;
-	}
+	@Qualifier("joinService")
+	private JoinService joinService;
+	
 
 	/*
 	 * 로그인 페이지
 	 */
+	@RequestMapping(value="/join")
+	public ModelAndView join(@ModelAttribute("reqMap") CmMap reqVo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		ModelAndView	mav	= new ModelAndView("/join");
+
+		return mav;
+	}
+	
 	@RequestMapping(value="/login")
 	public ModelAndView login(@ModelAttribute("reqMap") CmMap reqVo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		ModelAndView	mav	= new ModelAndView("/login");
+
 		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getAdress", produces="application/json", consumes = "application/json")
+	public ArrayList<AdressVO> getAdress(@RequestBody AdressVO vo)
+	{
+		return joinService.getAdress(vo);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/idCheck", produces="application/json", consumes = "application/json")
+	public ArrayList<UserVO> idCheck(@RequestBody UserVO vo)
+	{
+		return joinService.idCheck(vo);
 	}
 	
 	@RequestMapping(value = "/login_process",produces = "application/json") 

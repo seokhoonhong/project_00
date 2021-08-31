@@ -1,4 +1,4 @@
-package com.hong.hakwon.common;
+package com.hong.vo;
 
 import java.io.Serializable;
 import java.util.Map;

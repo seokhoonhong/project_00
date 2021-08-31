@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+
+<mapper namespace="com.hong.join.mapper.JoinMapper">
+
+	<!-- 학생 목록(학급 기준) -->
+	<select id="getAdress" resultType="AdressVO">
+		<choose>
+			<when test = "sido_name == null">
+				SELECT sido_name
+				FROM
+				(
+					SELECT * 
+					FROM sido sd
+					INNER JOIN sigungu sg
+				)
+				GROUP BY sido_cd;
+			</when>
+			<when test = "sido_name != null">
+				SELECT sigungu_name
+				FROM
+				(
+					SELECT * 
+					FROM sido sd
+					INNER JOIN sigungu sg
+					ON sd.sido_cd = sg.sido_cd
+				)
+				WHERE sido_name = #{sido_name};
+			</when>
+		</choose>
+	</select>
+	
+	<select id="idCheck" resultType="UserVO">
+		SELECT * 
+		FROM userBoard
+		WHERE id = #{id};
+	</select>
+	
+
+</mapper>

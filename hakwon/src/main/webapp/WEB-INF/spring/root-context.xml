@@ -12,7 +12,6 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- <bean id="tService" class="com.hong.hakwon.TeacherDAOImpl" /> -->
-	<bean id="uService" class="com.hong.hakwon.UserDAOImpl" />
 	<!-- <bean id="bService" class="com.hong.hakwon.BookDAOImpl" />
 	<bean id="cService" class="com.hong.hakwon.ClassDAOImpl" />
 	<bean id="qService" class="com.hong.hakwon.QuestionDAOImpl" /> -->
@@ -22,5 +21,24 @@
 		<property name="url" value="jdbc:mysql://localhost/{스키마명}?useSSL=false&serverTimezone=Asia/Seoul"> 
 		</property> <property name="username" value="{아이디}"></property> <property 
 		name="password" value="{비밀번호}"></property> </bean> -->
+		
+	
+	<!-- 커넥션 풀 설정 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="org.sqlite.JDBC" />
+        <property name="url" value="jdbc:sqlite:C:\db\carrot.db" />
+	</bean>
+		
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"  />	
+		<!-- xml매퍼의 위치 지정 -->
+
+		<property name="mapperLocations" value="classpath:/query/*.xml" />
+
+		<!-- 마이바티스 xml설정의 위치 지정 -->
+		<property name="configLocation" value="classpath:/util/SqlMapConfig.xml"/>
+	</bean>
+		
+		<mybatis-spring:scan base-package="com.hong.*.mapper"/>
 
 </beans>

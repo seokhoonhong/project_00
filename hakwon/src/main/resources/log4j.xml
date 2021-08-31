@@ -9,16 +9,16 @@
 		</layout>
 	</appender>
 
-	<!-- 날짜별 로그 파일 생성 -->
+	<!-- 날짜별 로그 파일 생성 
 	<appender name="rollingFile" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="File" value="C:/Users/정지원/Desktop/iamlog.log" />
-		<param name="Append" value="true" /> <!-- param name="MaxFileSize" value="100MB"/ --> <!-- param name="MaxBackupIndex" value="2"></param -->
+		<param name="Append" value="true" /> <!-- param name="MaxFileSize" value="100MB"/ --> <!-- param name="MaxBackupIndex" value="2"></param 
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"
 				value="[%d{yyyy-MM-dd HH:mm:ss}] [%c{1}] [%p] [%X{userId}] %m %n" />
 		</layout>
-	</appender>
+	</appender>-->
 
 	<!-- 특정 패키지 출력 설정 -->
 	<logger name="org.apache.ibatis">

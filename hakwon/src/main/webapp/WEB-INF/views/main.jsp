@@ -2,5 +2,5 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 <body>
-	<h1>로그인 페이지</h1>
+	<h1>메인페이지</h1>
 </body>
