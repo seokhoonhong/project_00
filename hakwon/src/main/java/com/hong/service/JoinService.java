@@ -1,4 +1,4 @@
-package com.hong.join.service;
+package com.hong.service;
 
 import java.util.ArrayList;
 
@@ -8,4 +8,5 @@ import com.hong.vo.UserVO;
 public interface JoinService {
 	public ArrayList<AdressVO> getAdress(AdressVO vo);
 	public ArrayList<UserVO> idCheck(UserVO vo);
+	public void idInsert(UserVO vo);
 }

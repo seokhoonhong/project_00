@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="../../resources/js/join.js" defer></script>
 
 <body>
@@ -21,7 +22,7 @@
 						</br>
 						</br>
 						
-						<label for="pwd">비밀번호</label> <input type="password"class="form-control pwd-1" name="passowrd">
+						<label for="pwd">비밀번호</label> <input type="password"class="form-control pwd-1" name="password">
 						<sapn class="pw-text1"></sapn>
 						</br>
 						
@@ -66,29 +67,6 @@
 				</form>
 			</div>
     		
-    		<script>
-    			$('.idCheck').on("click",function()
-    			{
-    				console.log("작동함?");
-    				console.log($('#usr').val());
-    				$.ajax
-    		    	({
-    		    		type : "post",
-    		    		url : "idCheck",
-    		    		dataType : "json",
-    		    		contentType : "application/json; charset=UTF-8",
-    		    		data : JSON.stringify( {"id" : $('#usr').val() } ),
-    		    		success : function(data)
-    		    		{
-    		    			if(data.length == 0) $('#usr').attr("readonly",true);
-    		    		},
-    		    		error : function(error)
-    		    		{
-    		    			console.log(error);
-    		    		}
-    				})
-    			})
-    		</script>
     	
     <div class="col-sm-2 sidenav">
     </div>

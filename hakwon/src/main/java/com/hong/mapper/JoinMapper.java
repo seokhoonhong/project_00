@@ -1,4 +1,4 @@
-package com.hong.join.mapper;
+package com.hong.mapper;
 
 import java.util.ArrayList;
 
@@ -10,4 +10,5 @@ import com.hong.vo.UserVO;
 public interface JoinMapper {
 	public ArrayList<AdressVO> getAdress(AdressVO vo);
 	public ArrayList<UserVO> idCheck(UserVO vo);
+	public void idInsert(UserVO vo);
 }

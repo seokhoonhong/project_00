@@ -39,6 +39,6 @@
 		<property name="configLocation" value="classpath:/util/SqlMapConfig.xml"/>
 	</bean>
 		
-		<mybatis-spring:scan base-package="com.hong.*.mapper"/>
+		<mybatis-spring:scan base-package="com.hong.mapper"/>
 
 </beans>

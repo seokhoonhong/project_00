@@ -9,7 +9,21 @@ public class UserVO
 	private String sido_adress;
 	private String sigungu_adress;
 	private String email;
+	private String registDay;
+	private String userAgent;
 	
+	public String getUserAgent() {
+		return userAgent;
+	}
+	public void setUserAgent(String userAgent) {
+		this.userAgent = userAgent;
+	}
+	public String getRegistDay() {
+		return registDay;
+	}
+	public void setRegistDay(String registDay) {
+		this.registDay = registDay;
+	}
 	public String getId() {
 		return id;
 	}

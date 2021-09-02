@@ -255,6 +255,14 @@
 	    <version>1.4</version>
 	</dependency>
     
+    <!-- sha256 사용 -->
+	<dependency>
+	    <groupId>commons-codec</groupId>
+	    <artifactId>commons-codec</artifactId>
+	    <version>1.10</version>
+	</dependency>
+    
+    
 		
 	</dependencies>
 	<build>

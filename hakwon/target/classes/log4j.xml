@@ -12,7 +12,7 @@
 	<!-- 날짜별 로그 파일 생성 
 	<appender name="rollingFile" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="File" value="C:/Users/정지원/Desktop/iamlog.log" />
-		<param name="Append" value="true" /> <!-- param name="MaxFileSize" value="100MB"/ --> <!-- param name="MaxBackupIndex" value="2"></param 
+		<param name="Append" value="true" />  param name="MaxFileSize" value="100MB"/   param name="MaxBackupIndex" value="2"></param 
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"

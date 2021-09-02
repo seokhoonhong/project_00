@@ -1,3 +1,7 @@
+var validate; // ajax의 반환값에따라 값이 결정되며 modal의 응답화면을 결정하는데 사용
+var numRe = name.search(/[0-9]/g); //숫자 정규식 
+var engRe = name.search(/[a-z]/ig); // 영어 정규식 
+var speRe = name.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 			
 	   		//아이디 - 공백x , 한글x
 	   		$('#usr').on("keyup",idCheck);
@@ -22,6 +26,57 @@
 	   		   	}
 	   		}
 
+    		
+    		//중복버튼 - db의 userBoard에 중복되는 값 없을경우 readonly로변환
+   			$('.idCheck').on("click",function()
+   			{
+   				var usr = $("#usr").val();
+	   			$.ajax
+	    	    ({
+	    	    		
+	    		   	type : "post",
+	    		   	url : "idCheck",
+	    		   	dataType : "json",
+	    		   	contentType : "application/json; charset=UTF-8",
+	    		    data : JSON.stringify( {"id" : $('#usr').val() } ),
+	    		    success : function(data)
+	    		    {
+	    		    	validate = data.length; //$('#usr').attr("readonly",true);
+	   		    	},
+	   		    	error : function(error)
+	   		    	{
+	   		    		console.log(error);
+	    	    	}
+	    		})
+	    		
+   				if( usr.search(/\s/) != -1 || korRe.test(usr) || usr == "" ) return;
+   				else
+   				{
+	    			
+	   				Swal.fire({
+	  				  title: $('#usr').val()+'를 아이디로 사용하시겠습니까?',
+	  				  showDenyButton: true,
+	  				  showCancelButton: true,
+	  				  confirmButtonText: `Save`
+	  				}).then((result) => {
+	  				  /* Read more about isConfirmed, isDenied below */
+	  				  if (result.isConfirmed)
+	  				  {
+	  					if( validate == 0)
+	  					{
+		  				    Swal.fire('사용 가능한 ID 입니다.', '', 'success')
+		  				  	$('#usr').attr("readonly",true);
+	  					}else
+	  					{
+	  						Swal.fire('사용 중인 ID 입니다.', '', 'info')	
+	  					}
+	  				  }
+	  				})
+   				}
+   				
+    		})
+    		
+			
     		//비밀번호 검증 - 공백x , 한글x 
     		$('.pwd-1').on("keyup",passwordCheck);
     		
@@ -152,8 +207,10 @@
 		    		}
 		    	})
 	    	}
+	    	
 	    	//join페이지 호출시 자동으로 한번 getAdress함수를 호출한다  -> 시,도값을 받아온다
 	    	getAdress();
+	    	
 	    	//시,도 값을 선택할때 getAdress함수를 호출하도록 이벤트를 할당한다 -> 시,군,구 값을 받아온다
 	    	document.querySelector(".sido").onchange = function()
 	    	{
@@ -176,15 +233,16 @@
 		   		else if(korRe.test(pw))	return alert("비밀번호 형식이 맞지 않습니다.");
 		   			
 				var name = $('.name').val();
-	    		if ( name.search(/\s/) != -1 || numRe < 0 || engRe < 0 || speRe < 0 ) return alert("이름은 한글만 입력 가능합니다.");
-					    		
+				
+				if( !(validate == 0) ) return alert("아이디 중복 검사를 해주세요");
 	    		if( $("#usr").val() == "" ) return alert("아이디를 입력해 주세요.");
-	    		if( $(".pwd-2").val() == "" ) return alert("비밀번호 형식이 맞지 않습니다..");
+	    		if( $(".pwd-2").val() == "" ) return alert("비밀번호 형식이 맞지 않습니다.");
 	    		if( $(".pwd-1").val() == "" ) return alert("비밀번호를 입력해 주세요.");
-	    		if( $('.phoneNumber').val() == "" ) return alert("휴대폰 번호를 입력해 주세요.");
-	    		if( $('.phoneNumber').val() == "" ) return alert("이름을 입력해 주세요.");
+	    		if( $('.name').val() == "" ) return alert("이름을 입력해 주세요.");
+	    		if( $('.phone-input-2').val() == "" ) return alert("휴대폰 번호를 입력해 주세요.");
+	    		if( $('.phone-input-3').val() == "" ) return alert("휴대폰 번호를 입력해 주세요.");
 	    		if( $('.sido').val()== "" || $('.sigungu').val()== "" ) return alert("주소를 입력해 주세요.");
-	    		if( $('.email').val() == "" ) return alert("이메일을 입력해 주세요")
+				if( !emailRe.test($('.email').val()) || $('.email').val() == "" ) return alert("이메일 형식이 맞지 않습니다.");
 	    		
 	    		$('.joinTry').submit();
 	    	})

@@ -21,7 +21,7 @@
     }
     
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 700px}
+    .row.content {height: 800px}
     
     /* Set gray background color and 100% height */
     .sidenav {
@@ -70,6 +70,7 @@
     	background-color: rgb(34,34,34);
     	color : rgb(255,255,255);
     }
+    
   </style>
   
 </head>

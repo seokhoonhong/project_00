@@ -48,7 +48,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hong.join.service.JoinService;
+import com.hong.common.Sha256;
+import com.hong.service.JoinService;
+import com.hong.service.LoginService;
 import com.hong.vo.AdressVO;
 import com.hong.vo.CmMap;
 import com.hong.vo.UserVO;
@@ -66,16 +68,33 @@ import com.google.gson.JsonObject;
 @SuppressWarnings("rawtypes")
 public class MainController {
 	
-	private Log	logger	= LogFactory.getLog(this.getClass());
+	
+	/*
+	 *                 메인 페이지
+	 */
+	
+	@RequestMapping(value="/main")
+	public ModelAndView main(@ModelAttribute("reqMap") CmMap reqVo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView	mav	= new ModelAndView();
+		mav.setViewName("/main");
+		mav.addObject("data", "데이터");
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	/*
+	 *                회원가입 페이지
+	 */
 	
 	@Autowired
 	@Qualifier("joinService")
 	private JoinService joinService;
 	
-
-	/*
-	 * 로그인 페이지
-	 */
+	//회원가입 페이지 요청
 	@RequestMapping(value="/join")
 	public ModelAndView join(@ModelAttribute("reqMap") CmMap reqVo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
@@ -83,7 +102,49 @@ public class MainController {
 
 		return mav;
 	}
+	//회원가입 요청 - 1) 복호화 2)db에 회원정보 insert
+	@RequestMapping(value="/joinTry")
+	public ModelAndView joinTry(@ModelAttribute("reqMap") CmMap reqVo, HttpServletRequest request, HttpServletResponse response, UserVO vo) throws Exception {
+		
+		String password = Sha256.encrypt(vo.getPassword());
+		vo.setPassword(password);
+		joinService.idInsert(vo);
+		ModelAndView	mav	= new ModelAndView("/login");
+
+		return mav;
+	}
+	//db에서 주소 값 요청
+	@ResponseBody
+	@RequestMapping(value="/getAdress", produces="application/json", consumes = "application/json")
+	public ArrayList<AdressVO> getAdress(@RequestBody AdressVO vo)
+	{
+		return joinService.getAdress(vo);
+	}
 	
+	//아이디 중복검사 요청
+	@ResponseBody
+	@RequestMapping(value="/idCheck", produces="application/json", consumes = "application/json")
+	public ArrayList<UserVO> idCheck(@RequestBody UserVO vo)
+	{
+		ArrayList<UserVO> returnVO = joinService.idCheck(vo);
+		return returnVO;
+	}
+	
+	
+	
+	
+	
+	
+	/*
+	 *                    로그인 페이지
+	 */
+	
+	//로그인 페이지 요청
+	@Autowired
+	@Qualifier("loginService")
+	private LoginService loginService;
+	
+	//로그인 페이지 요청
 	@RequestMapping(value="/login")
 	public ModelAndView login(@ModelAttribute("reqMap") CmMap reqVo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
@@ -92,38 +153,50 @@ public class MainController {
 		return mav;
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/getAdress", produces="application/json", consumes = "application/json")
-	public ArrayList<AdressVO> getAdress(@RequestBody AdressVO vo)
-	{
-		return joinService.getAdress(vo);
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/idCheck", produces="application/json", consumes = "application/json")
-	public ArrayList<UserVO> idCheck(@RequestBody UserVO vo)
-	{
-		return joinService.idCheck(vo);
-	}
-	
-	@RequestMapping(value = "/login_process",produces = "application/json") 
-	@ResponseBody
-	public CmMap login_process(@RequestBody CmMap reqVo, HttpServletRequest request, HttpServletResponse response) throws Exception{ 
-		logger.info("reqVo : " + reqVo);
-		return reqVo;
-	}
+	//로그인 시도
+	@RequestMapping(value="/loginTry")
+	public ModelAndView loginTry(@ModelAttribute("reqMap") CmMap reqVo, HttpServletRequest request, HttpServletResponse response, UserVO vo) throws Exception {
+		
+		HttpSession session = request.getSession();
+		ModelAndView mav	= new ModelAndView();
+		
+		//접속환경 저장 , 암호화처리된 비밀번호 저장
+		vo.setUserAgent( request.getHeader("user-agent") );
+		vo.setPassword( Sha256.encrypt(vo.getPassword()) );
+		
+		//아이디,비밀번호 검증에 사용되는 값
+		UserVO returnVO = loginService.loginTry(vo);
+		
+		//아이디 비밀번호 검증
+		if(returnVO == null) 
+		{
+			System.out.println("로그인 실패");
+			mav.setViewName("/login");
+		}else
+		{
+			System.out.println("로그인 성공");
+			System.out.println(vo.getId());
+			loginService.loginLogInsert(vo);
+			session.setAttribute("userVO", vo);
+			
+			mav.setViewName("/main");
+		}
 
-	
-	/*
-	 * 메인 페이지
-	 */
-	@RequestMapping(value="/main")
-	public ModelAndView main(@ModelAttribute("reqMap") CmMap reqVo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		ModelAndView	mav	= new ModelAndView();
-		mav.setViewName("/main");
-		mav.addObject("data", "데이터");
 		return mav;
 	}
+	
+	
+	/*
+	 * private Log logger = LogFactory.getLog(this.getClass());
+	 * 
+	 * @RequestMapping(value = "/login_process",produces = "application/json")
+	 * 
+	 * @ResponseBody public CmMap login_process(@RequestBody CmMap reqVo,
+	 * HttpServletRequest request, HttpServletResponse response) throws Exception{
+	 * logger.info("reqVo : " + reqVo); return reqVo; }
+	 */
+
+	
 	
 	
 //	@RequestMapping(value ="/getSido")

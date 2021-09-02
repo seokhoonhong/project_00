@@ -4,7 +4,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 
-<mapper namespace="com.hong.join.mapper.JoinMapper">
+<mapper namespace="com.hong.mapper.JoinMapper">
 
 	<!-- 학생 목록(학급 기준) -->
 	<select id="getAdress" resultType="AdressVO">
@@ -39,5 +39,25 @@
 		WHERE id = #{id};
 	</select>
 	
-
+	<select id="idInsert">
+		INSERT INTO userBoard (
+								 id , 
+								 password ,
+								 name,
+								 phoneNumber , 
+								 sido_adress , 
+								 sigungu_adress , 
+								 email
+							   )
+		VALUES( 
+				#{id},
+				#{password},
+				#{name},
+				#{phoneNumber},
+				#{sido_adress},
+				#{sigungu_adress},
+				#{email}
+			   );
+	</select>
+	
 </mapper>
