@@ -32,10 +32,10 @@ public class JoinServiceImp implements JoinService
 	}
 
 	@Override
-	public void idInsert(UserVO vo) {
+	public int idInsert(UserVO vo) {
 		// TODO Auto-generated method stub
-		joinMapper.idInsert(vo);
-		return; 
+		//joinMapper.idInsert(vo);
+		return joinMapper.idInsert(vo); 
 	}
 
 

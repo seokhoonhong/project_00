@@ -4,3 +4,7 @@
 <body>
 	<h1>메인페이지</h1>
 </body>
+
+<script>
+	var responseMsg = "<c:out value="${message}" />";
+</script>

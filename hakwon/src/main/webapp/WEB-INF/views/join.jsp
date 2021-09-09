@@ -67,7 +67,10 @@
 				</form>
 			</div>
     		
-    	
+    		<script>
+				var responseMsg = "<c:out value="${message}" />";
+			</script>
+    		
     <div class="col-sm-2 sidenav">
     </div>
     

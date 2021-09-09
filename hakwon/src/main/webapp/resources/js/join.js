@@ -143,6 +143,14 @@ var speRe = name.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 	    		}
     		});
     		
+    		$('.phone-input-1').on("change",phoneNunberReset);
+    		
+    		function phoneNunberReset()
+			{
+				$('.phone-input-2').val("");
+				$('.phone-input-3').val("");
+			}
+    		
     		//휴대폰 번호 중간 칸- 010,019에따라 2번째칸 숫자입력 갯수  변경, 숫자만 입력 가능 , 2번째자리 입력시 3번쨰로 이동
     		$('.phone-input-2').on
     		({
@@ -243,6 +251,7 @@ var speRe = name.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 	    		if( $('.phone-input-3').val() == "" ) return alert("휴대폰 번호를 입력해 주세요.");
 	    		if( $('.sido').val()== "" || $('.sigungu').val()== "" ) return alert("주소를 입력해 주세요.");
 				if( !emailRe.test($('.email').val()) || $('.email').val() == "" ) return alert("이메일 형식이 맞지 않습니다.");
+	    		$('.name').val( $('.name-textarea').val() );
 	    		
 	    		$('.joinTry').submit();
 	    	})

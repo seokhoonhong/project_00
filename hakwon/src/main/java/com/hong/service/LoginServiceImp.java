@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.hong.mapper.JoinMapper;
-import com.hong.mapper.loginMapper;
+import com.hong.mapper.LoginMapper;
 import com.hong.vo.AdressVO;
 import com.hong.vo.UserVO;
 
@@ -17,7 +17,7 @@ public class LoginServiceImp implements LoginService
 {
 
 	@Autowired
-	private loginMapper loginMapper;
+	private LoginMapper loginMapper;
 
 	@Override
 	public UserVO loginTry(UserVO vo) {

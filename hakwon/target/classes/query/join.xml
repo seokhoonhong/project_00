@@ -39,7 +39,8 @@
 		WHERE id = #{id};
 	</select>
 	
-	<select id="idInsert">
+	<!-- 태그조심 -->
+	<insert id="idInsert">
 		INSERT INTO userBoard (
 								 id , 
 								 password ,
@@ -58,6 +59,6 @@
 				#{sigungu_adress},
 				#{email}
 			   );
-	</select>
+	</insert>
 	
 </mapper>

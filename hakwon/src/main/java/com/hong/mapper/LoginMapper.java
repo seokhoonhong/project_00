@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.hong.vo.AdressVO;
 import com.hong.vo.UserVO;
 
-public interface loginMapper {
+public interface LoginMapper {
 	public UserVO loginTry(UserVO vo);
 	public void loginLogInsert(UserVO vo);
 }

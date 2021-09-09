@@ -2,6 +2,8 @@ package com.hong.common;
 
 import java.security.MessageDigest;
 
+
+// 입력받은 비밀번호를 256bit의 securehashing 처리하는 알고리즘
 public class Sha256 {
 	public static String encrypt(String planText) {
 		try {

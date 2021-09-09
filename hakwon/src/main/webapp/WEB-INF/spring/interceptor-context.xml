@@ -11,8 +11,9 @@
 	
 
 	<mvc:interceptors>
+	
 		<mvc:interceptor>
-			<mvc:mapping path="/login/loginTry" />
+			<mvc:mapping path="/bulletinBoard/write" />
 			<ref bean="LoginCheckHandler" />
 		</mvc:interceptor>
 

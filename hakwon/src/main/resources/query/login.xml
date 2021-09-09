@@ -4,7 +4,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 
-<mapper namespace="com.hong.mapper.loginMapper">
+<mapper namespace="com.hong.mapper.LoginMapper">
 
 
 	<select id="loginTry" resultType="UserVO">

@@ -8,5 +8,5 @@ import com.hong.vo.UserVO;
 public interface JoinService {
 	public ArrayList<AdressVO> getAdress(AdressVO vo);
 	public ArrayList<UserVO> idCheck(UserVO vo);
-	public void idInsert(UserVO vo);
+	public int idInsert(UserVO vo);
 }

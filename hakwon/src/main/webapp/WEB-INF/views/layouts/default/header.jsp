@@ -71,6 +71,14 @@
     	color : rgb(255,255,255);
     }
     
+    .loginAndLogout{
+    	color : rgb(157,157,157);
+    }
+    .loginAndLogoutLi{
+    	margin-top: 15px;
+    	cursor: pointer;
+    }
+    
   </style>
   
 </head>
@@ -91,16 +99,28 @@
 	        <li class="active"><a href="${pageContext.request.contextPath }/main">Home</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
+	      	<li><a href="${pageContext.request.contextPath }/bulletinBoard"><span class=""></span>게시판</a></li>
 	      	<li><a href="${pageContext.request.contextPath }/join"><span class=""></span>회원가입</a></li>
-	        <li><a href="${pageContext.request.contextPath }/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	        <li class="loginAndLogoutLi"><span class="glyphicon glyphicon-log-in loginAndLogout"></span></li>
 	      </ul>
 	    </div>
 	  </div>
 	</nav>
-
+	
+	<input type="hidden" class="sessionCheck" value="<%= session.getAttribute("UserVO") %>"> 
 </header>
 
 <script>
-
-
+	(function()
+	{
+		if( $('.sessionCheck').val() != "null") $('.loginAndLogout').html("로그아웃");
+		else $('.loginAndLogout').html("로그인");
+	})();
+	
+	$('.loginAndLogout').on("click",function()
+	{
+		if( $('.sessionCheck').val() != "null") location.href="${pageContext.request.contextPath }/logout";
+		else location.href="${pageContext.request.contextPath }/login";
+	})
+	
 </script>
