@@ -65,13 +65,7 @@ import com.google.gson.JsonObject;
 
 
 
-/**
- * @author Seok-Hoon, Hong
- * @version 1.0
- * @lastEdit 2017. 9. 19
- */
 @Controller
-@SuppressWarnings("rawtypes")
 public class MainController {
 	
 	
@@ -183,7 +177,7 @@ public class MainController {
 		public ModelAndView logout( HttpServletRequest request, HttpServletResponse response) throws Exception {
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("UserVO", "null");
+			session.setAttribute("UserVO", null);
 			ModelAndView	mav	= new ModelAndView("/main");
 			return mav;
 		}
@@ -206,7 +200,7 @@ public class MainController {
 		if(returnVO == null) 
 		{
 			model.addAttribute("message", "로그인 실패");
-			return "redirect:/login";
+			return "/login";
 		}else
 		{
 			//로그인 성공시 로그 기록

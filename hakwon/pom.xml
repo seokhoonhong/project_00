@@ -168,6 +168,7 @@
 		
 
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<!--  Java객체를 JSON으로 표현 변환 가능 -->
 		<dependency>
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
@@ -183,6 +184,7 @@
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.rxtx/rxtx -->
+		<!-- 시리얼 통신 라이브러리 이거뭐지? -->
 		<dependency>
 		    <groupId>org.rxtx</groupId>
 		    <artifactId>rxtx</artifactId>
@@ -190,41 +192,44 @@
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
-<dependency>
-    <groupId>commons-logging</groupId>
-    <artifactId>commons-logging</artifactId>
-    <version>1.1.1</version>
-</dependency>
+		<!-- 에러 남기는건가?  -->
+		<dependency>
+		    <groupId>commons-logging</groupId>
+		    <artifactId>commons-logging</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
 
-
-<dependency>
+		
+		<!-- java에서 String을 JSON data로 사용가능 -->
+		<dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1</version>
         </dependency>
         
+        
+        <!-- axios는 브라우저, Node.js를 위한 Promise API를 활용하는 HTTP 비동기 통신 라이브러리-->
         <dependency>
 		    <groupId>org.webjars.npm</groupId>
 		    <artifactId>axios</artifactId>
 		    <version>0.19.2</version>
 		</dependency>
 		
+		<!-- POJO기반의 Java Object 객체를 JSON으로  , 반대로도 가능 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.3</version>
 		</dependency>
 		
+		<!-- 이것또한 JSON객체 변환 -->
 		<dependency>
-
-		<groupId>org.codehaus.jackson</groupId>
-		
-		<artifactId>jackson-mapper-asl</artifactId>
-		
-		<version>1.9.13</version>
-		
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
 		</dependency>
 		
+	<!-- tiles사용 라이브러리 -->
 	<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-jsp</artifactId>
@@ -249,6 +254,7 @@
     </dependency>
     
     <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+    <!-- db커넥션풀 생성 용도로 추측됨 -->
 	<dependency>
 	    <groupId>commons-dbcp</groupId>
 	    <artifactId>commons-dbcp</artifactId>
