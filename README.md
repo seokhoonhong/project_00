@@ -30,7 +30,7 @@ SQLlite-3.12.10-winx64
 스키마명 - 스키마이름 + DB
 ```
 
-![erd](https://user-images.githubusercontent.com/84488007/132993792-ab86586d-82e0-42be-95b9-04b0207cc717.png)
+![erd](https://user-images.githubusercontent.com/84488007/132994927-504067da-c289-41fe-abda-871c6d95dda6.png)
 
 # 첫번째로 만들 목표
 >회원가입 - 아이디,비밀번호,이름,주소 유효성 검사, 이메일 인증<br/>
