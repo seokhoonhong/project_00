@@ -40,7 +40,7 @@ HSHT_INTR - 게시글DB와 해쉬태그DB 인터페이스
 HASHTAG - 해시태그 목록 저장
 ```
 
-![erd](https://user-images.githubusercontent.com/84488007/133440639-6958e576-3f1a-4bb3-a20e-d201dbd17bf8.png)
+![erd](https://user-images.githubusercontent.com/84488007/133442950-7fc20a6e-39ee-41bd-84fa-bc1926b8fa0d.png)
 
 # 첫번째로 만들 목표 ( 기능 수정중 )
 >회원가입 - 아이디,비밀번호,이름,주소 유효성 검사, 이메일 인증<br/>
